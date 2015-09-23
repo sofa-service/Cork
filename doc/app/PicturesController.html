@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>class PicturesController - Rails Application Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="ApplicationController.html">ApplicationController</a>
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-i-add_tag">#add_tag</a>
+    
+    <li ><a href="#method-i-create">#create</a>
+    
+    <li ><a href="#method-i-entry">#entry</a>
+    
+    <li ><a href="#method-i-grouped_by_tag">#grouped_by_tag</a>
+    
+    <li ><a href="#method-i-instances">#instances</a>
+    
+    <li ><a href="#method-i-new">#new</a>
+    
+    <li ><a href="#method-i-picture_params">#picture_params</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-PicturesController">
+  <h1 id="class-PicturesController" class="class">
+    class PicturesController
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-add_tag" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">add_tag</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="add_tag-source">
+            <pre><span class="ruby-comment"># File app/controllers/pictures_controller.rb, line 24</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_tag</span>
+  <span class="ruby-ivar">@picture</span> = <span class="ruby-constant">Picture</span>.<span class="ruby-identifier">new</span>({<span class="ruby-value">:url</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">picture_params</span>[<span class="ruby-value">:url</span>]})
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-create" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">create</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="create-source">
+            <pre><span class="ruby-comment"># File app/controllers/pictures_controller.rb, line 28</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
+  <span class="ruby-identifier">create_params</span> = <span class="ruby-identifier">picture_params</span>
+  <span class="ruby-identifier">target_tag</span> = <span class="ruby-constant">Tag</span>.<span class="ruby-identifier">find</span>(<span class="ruby-value">:first</span>, <span class="ruby-value">:conditions</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-string">&quot;name = ?&quot;</span>, <span class="ruby-identifier">create_params</span>[<span class="ruby-value">:tag_name</span>]])
+
+  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span> <span class="ruby-identifier">target_tag</span>.<span class="ruby-identifier">id</span>
+    <span class="ruby-ivar">@tag</span> = <span class="ruby-constant">Tag</span>.<span class="ruby-identifier">new</span>({<span class="ruby-value">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">picture_params</span>[<span class="ruby-value">:tag_name</span>]})
+    <span class="ruby-ivar">@tag</span>.<span class="ruby-identifier">save</span>
+    <span class="ruby-identifier">target_tag</span> = <span class="ruby-ivar">@tag</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-ivar">@picture</span> = <span class="ruby-constant">Picture</span>.<span class="ruby-identifier">new</span>({
+    <span class="ruby-value">:url</span>       =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">picture_params</span>[<span class="ruby-value">:url</span>],
+    <span class="ruby-value">:tag_id</span>    =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">target_tag</span>.<span class="ruby-identifier">id</span>,
+    <span class="ruby-value">:dangerous</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">picture_params</span>[<span class="ruby-value">:dangerous</span>]
+  })
+  <span class="ruby-ivar">@picture</span>.<span class="ruby-identifier">save</span>
+  <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">picture_path</span>(<span class="ruby-ivar">@picture</span>.<span class="ruby-identifier">id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-entry" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">entry</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="entry-source">
+            <pre><span class="ruby-comment"># File app/controllers/pictures_controller.rb, line 10</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">entry</span>
+  <span class="ruby-ivar">@picture</span> = <span class="ruby-constant">Picture</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-grouped_by_tag" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">grouped_by_tag</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="grouped_by_tag-source">
+            <pre><span class="ruby-comment"># File app/controllers/pictures_controller.rb, line 14</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">grouped_by_tag</span>
+  <span class="ruby-ivar">@tag</span> = <span class="ruby-constant">Tag</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+
+  <span class="ruby-ivar">@grouped_pictures</span> = <span class="ruby-constant">Picture</span>.<span class="ruby-identifier">find</span>(<span class="ruby-value">:all</span>, <span class="ruby-value">:conditions</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-value">:tag_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>] })
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-instances" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">instances</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="instances-source">
+            <pre><span class="ruby-comment"># File app/controllers/pictures_controller.rb, line 3</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">instances</span>
+  <span class="ruby-ivar">@pictures</span> = <span class="ruby-constant">Picture</span>.<span class="ruby-identifier">all</span>
+
+  <span class="ruby-comment"># add tag_name on picture object</span>
+  <span class="ruby-ivar">@pictures</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">picture</span><span class="ruby-operator">|</span> <span class="ruby-identifier">picture</span>.<span class="ruby-identifier">tag</span> = <span class="ruby-constant">Tag</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">picture</span>.<span class="ruby-identifier">tag_id</span>)}
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File app/controllers/pictures_controller.rb, line 20</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@picture</span> = <span class="ruby-constant">Picture</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-picture_params" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">picture_params</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="picture_params-source">
+            <pre><span class="ruby-comment"># File app/controllers/pictures_controller.rb, line 47</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">picture_params</span>
+  <span class="ruby-identifier">params</span>[<span class="ruby-value">:picture</span>].<span class="ruby-identifier">permit</span>(<span class="ruby-value">:url</span>, <span class="ruby-value">:tag_name</span>, <span class="ruby-value">:dangerous</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

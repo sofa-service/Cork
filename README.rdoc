@@ -1,4 +1,4 @@
-## Cork
+== Cork
 
 
 * Ruby version
@@ -19,12 +19,12 @@
 
 * ...
 
-### Setup
+=== Setup
 * exec provision.sh
 * Database creation
-  * set `MYSQLPASS`
-  * `rake db:create`
-  * `rake db:migrate`
+  * set <tt>MYSQLPASS</tt>
+  * <tt>rake db:create</tt>
+  * <tt>rake db:migrate</tt>
 
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
