@@ -1,4 +1,19 @@
 Cork::Application.routes.draw do
+
+  root :to => 'pictures#instances'
+
+  get  'tags'        => 'tags#instances'
+  get  'tags/:id'    => 'tags#entry', as: 'tag'
+  get  'tag/new'     => 'tags#new'
+  post 'tags'        => 'tags#create'
+
+  get  'pictures'          => 'pictures#instances'
+  get  'pictures/:id'      => 'pictures#entry', as: 'picture'
+  get  'tags/:id/pictures' => 'pictures#group_by_tag'
+  get  'picture/new'       => 'pictures#new'
+  post 'pictures'          => 'pictures#create'
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

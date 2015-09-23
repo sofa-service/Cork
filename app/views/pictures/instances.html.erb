@@ -1,0 +1,9 @@
+<h1>Pictures</h1>
+
+<dl>
+  <% @pictures.each do |picture| %>
+  <img src="<%= picture.url %>">
+  <li>tag: <%= link_to picture.tag.name, tag_path(picture.tag_id) %></li>
+  <% end %>
+</dl>
+
