@@ -1,0 +1,7 @@
+<h1>Picture No.<%= @picture.id %></h1>
+
+<dl>
+  <img src="<%= @picture.url %>">
+  <li>tag: <%= link_to @picture.tag.name, tag_path(@picture.tag_id) %></li>
+</dl>
+

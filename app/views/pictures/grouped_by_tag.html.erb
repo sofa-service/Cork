@@ -1,7 +1,7 @@
-<h1>Cork Top</h1>
+<h1><%= @tag.name %></h1>
 
 <dl>
-  <% @pictures.each do |picture| %>
+  <% @grouped_pictures.each do |picture| %>
   <img src="<%= picture.url %>">
   <li>tag: <%= link_to picture.tag.name, grouped_by_tag_pictures_path(picture.tag_id) %></li>
   <% end %>

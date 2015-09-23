@@ -9,9 +9,10 @@ Cork::Application.routes.draw do
 
   get  'pictures'          => 'pictures#instances'
   get  'pictures/:id'      => 'pictures#entry', as: 'picture'
-  get  'tags/:id/pictures' => 'pictures#group_by_tag'
+  get  'tags/:id/pictures' => 'pictures#grouped_by_tag', as: 'grouped_by_tag_pictures'
   get  'picture/new'       => 'pictures#new'
-  post 'pictures'          => 'pictures#create'
+  get  'picture/add_tag'   => 'pictures#add_tag', as: 'picture_add_tag'
+  post 'pictures'          => 'pictures#create', as: 'picture_create'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

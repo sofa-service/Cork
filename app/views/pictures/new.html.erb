@@ -1,0 +1,16 @@
+<div class="page-header">
+  <h1>写真の登録</h1>
+</div>
+
+<%= form_for @picture, :url => picture_add_tag_path, :method => "get" do |f| %>
+
+<div class="form-group">
+  <%= f.label :url %><br>
+  <%= f.text_field :url %>
+</div>
+
+<p>
+  <%= f.submit '確認', class: 'btn btn-default', data: { disable_with: '...' } %>
+</p>
+
+<% end %>

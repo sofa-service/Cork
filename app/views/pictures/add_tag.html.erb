@@ -1,0 +1,23 @@
+<div class="page-header">
+  <h1>タグの追加</h1>
+</div>
+
+<div style="text-align:center">
+  <img src="<%= @picture.url %>">
+</div>
+
+<%= form_for @picture, :url => picture_create_path, :method => "post" do |f| %>
+
+<div class="form-group">
+  <%= f.label :tag_name %><br>
+  <%= f.text_field :tag_name %><br><br>
+  <%= f.label :dangerous %>
+  <%= f.check_box :dangerous, {}, 1, 0 %>
+  <%= f.hidden_field :url, :value => @picture.url %>
+</div>
+
+<p>
+  <%= f.submit '追加', class: 'btn btn-default', data: { disable_with: '...' } %>
+</p>
+
+<% end %>
