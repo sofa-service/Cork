@@ -1,7 +1,9 @@
 <h1>Picture No.<%= @picture.id %></h1>
 
-<dl>
-  <img src="<%= @picture.url %>">
-  <li>tag: <%= link_to @picture.tag.name, tag_path(@picture.tag_id) %></li>
-</dl>
+  <div class="thumbnail">
+    <img src="<%= @picture.url %>">
+    <div class="caption">
+      <p align="center"><a href="<%= grouped_by_tag_pictures_path(@picture.tag_id) %>" class="btn btn-link btn-block">#<%= @picture.tag.name %></a></p>
+    </div>
+  </div>
 

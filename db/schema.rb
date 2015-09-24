@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150922125534) do
+ActiveRecord::Schema.define(version: 20150924180746) do
 
   create_table "pictures", force: true do |t|
     t.string   "url"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20150922125534) do
   end
 
   add_index "pictures", ["tag_id"], name: "index_pictures_on_tag_id", using: :btree
+  add_index "pictures", ["url"], name: "index_pictures_on_url", unique: true, using: :btree
 
   create_table "tags", force: true do |t|
     t.string   "name"

@@ -23,6 +23,12 @@ class PicturesController < ApplicationController
 
   def add_tag
     @picture = Picture.new({:url => picture_params[:url]})
+
+    if @picture.valid?
+    else
+      render :add_tag, flash: { notice: @picture.errors.full_messages }
+      return
+    end
   end
 
   def create
@@ -40,12 +46,19 @@ class PicturesController < ApplicationController
       :tag_id    => target_tag.id,
       :dangerous => picture_params[:dangerous]
     })
-    @picture.save
-    redirect_to picture_path(@picture.id)
+
+    if @picture.save
+      redirect_to picture_path(@picture.id)
+      return
+    else
+      redirect_to :back, flash: { notice: @picture.errors.full_messages }
+      return
+    end
   end
 
-  def picture_params
-    params[:picture].permit(:url, :tag_name, :dangerous)
-  end
+  private
+    def picture_params
+      params[:picture].permit(:url, :tag_name, :dangerous)
+    end
 
 end

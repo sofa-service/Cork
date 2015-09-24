@@ -2,6 +2,19 @@ class TagsController < ApplicationController
   before_action :set_tag, only: [:entry, :edit, :update, :destroy]
 
   def instances
+
+    if defined? tag_params[:name]
+      target_tag = Tag.find(:first, :conditions => ["name = ?", tag_params[:name]])
+
+      unless defined? target_tag.id
+        redirect_to pictures_path, flash: { notice: "Tag is Not Found." }
+        return
+      end
+
+      redirect_to grouped_by_tag_pictures_path(target_tag.id)
+      return
+    end
+
     @tags = Tag.all
   end
 

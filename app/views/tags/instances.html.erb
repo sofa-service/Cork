@@ -1,0 +1,6 @@
+<h1>tags</h1>
+
+  <% @tags.each do |tag| %>
+      <p align="center"><a href="<%= grouped_by_tag_pictures_path(tag.id) %>" class="btn btn-link btn-block">#<%= tag.name %></a></p>
+  <% end %>
+

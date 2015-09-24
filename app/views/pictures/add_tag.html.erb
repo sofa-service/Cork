@@ -2,6 +2,12 @@
   <h1>タグの追加</h1>
 </div>
 
+<% if flash[:notice] %>
+  <div class="alert alert-success">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
 <div style="text-align:center">
   <img src="<%= @picture.url %>">
 </div>

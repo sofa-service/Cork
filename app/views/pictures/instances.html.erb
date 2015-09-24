@@ -1,9 +1,36 @@
-<h1>Cork Top</h1>
-
-<dl>
-  <% @pictures.each do |picture| %>
-  <img src="<%= picture.url %>">
-  <li>tag: <%= link_to picture.tag.name, grouped_by_tag_pictures_path(picture.tag_id) %></li>
+<div class="container">
+  <% if flash[:notice] %>
+    <div class="alert alert-success">
+      <%= flash[:notice] %>
+    </div>
   <% end %>
-</dl>
+  <div class="row">
+    <!--<div class="thumbnails">-->
+    <div class="pins-grid">
 
+      <% @pictures.each do |picture| %>
+        <!--
+        <div class="col-md-4">
+          <div class="thumbnail">
+            <img src="<%= picture.url %>">
+            <div class="caption">
+              <p align="center"><a href="<%= grouped_by_tag_pictures_path(picture.tag_id) %>" class="btn btn-link btn-block">#<%= picture.tag.name %></a></p>
+            </div>
+          </div>
+        </div>
+        -->
+
+        <div class="pin">
+          <div class="image">
+            <img data-src="<%= picture.url %>"/>
+          </div>
+          <div class="credits">
+            <p align="center"><a href="<%= grouped_by_tag_pictures_path(picture.tag_id) %>" class="btn btn-link btn-block">#<%= picture.tag.name %></a></p>
+          </div>
+        </div>
+
+      <% end %>
+
+    </div>
+  </div>
+</div>

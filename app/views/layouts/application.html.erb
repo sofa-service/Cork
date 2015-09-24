@@ -13,6 +13,17 @@
   <div class="container">
     <div class="navbar-header">
       <%= link_to 'Cork', root_path, class: 'navbar-brand' %>
+
+      <%= form_tag('/tags', :method => :get, class: 'navbar-form navbar-left') do %>
+        <div class="form-group" align="center">
+          <input id="tag_name" name="tag[name]" type="text" class="form-control" placeholder="Search">
+        </div>
+      <% end %>
+
+      <div class="navbar-btn navbar-right" style="text-align:right">
+        <a href="<%= picture_new_path() %>" class="btn btn-default">Add Pic</a>
+      </div>
+
     </div>
   </div>
   </header>
