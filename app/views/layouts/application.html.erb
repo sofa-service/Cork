@@ -11,17 +11,19 @@
 <body>
   <header class="navbar navbar-default" role="navigation">
   <div class="container">
-    <div class="navbar-header">
+    <div class="navbar-header" style="width:100%">
       <%= link_to 'Cork', root_path, class: 'navbar-brand' %>
 
-      <%= form_tag('/tags', :method => :get, class: 'navbar-form navbar-left') do %>
-        <div class="form-group" align="center">
-          <input id="tag_name" name="tag[name]" type="text" class="form-control" placeholder="Search">
-        </div>
-      <% end %>
+      <div style="width:300px; margin:0 auto;">
+        <%= form_tag('/tags', :method => :get, class: 'navbar-form navbar-left') do %>
+          <div class="form-group" align="center">
+            <input id="tag_name" name="tag[name]" type="text" class="form-control" placeholder="Search">
+          </div>
+        <% end %>
+      </div>
 
       <div class="navbar-btn navbar-right" style="text-align:right">
-        <a href="<%= picture_new_path() %>" class="btn btn-default">Add Pic</a>
+        <a href="<%= picture_new_path() %>" class="btn btn-default">+ Pic</a>
       </div>
 
     </div>

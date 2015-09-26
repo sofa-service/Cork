@@ -5,20 +5,9 @@
     </div>
   <% end %>
   <div class="row">
-    <!--<div class="thumbnails">-->
     <div class="pins-grid">
 
       <% @pictures.each do |picture| %>
-        <!--
-        <div class="col-md-4">
-          <div class="thumbnail">
-            <img src="<%= picture.url %>">
-            <div class="caption">
-              <p align="center"><a href="<%= grouped_by_tag_pictures_path(picture.tag_id) %>" class="btn btn-link btn-block">#<%= picture.tag.name %></a></p>
-            </div>
-          </div>
-        </div>
-        -->
 
         <div class="pin">
           <div class="image">
