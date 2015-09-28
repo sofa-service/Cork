@@ -11,7 +11,7 @@
 
         <div class="pin">
           <div class="image">
-            <img data-src="<%= picture.url %>"/>
+            <a href="pictures/<%= picture.id %>"><img data-src="<%= picture.url %>"/></a>
           </div>
           <div class="credits">
             <p align="center"><a href="<%= grouped_by_tag_pictures_path(picture.tag_id) %>" class="btn btn-link btn-block">#<%= picture.tag.name %></a></p>
