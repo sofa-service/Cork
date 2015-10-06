@@ -1,7 +1,7 @@
 class PicturesController < ApplicationController
 
   def instances
-    @pictures = Picture.all
+    @pictures = Picture.order("id DESC")
   end
 
   def entry
@@ -25,7 +25,7 @@ class PicturesController < ApplicationController
       "tag_id = ?", @tag.id
     ]).pluck(:picture_id)
 
-    @grouped_pictures = Picture.find(picture_ids)
+    @grouped_pictures = Picture.where(["id IN (?)", picture_ids]).order("id DESC")
   end
 
   def new
