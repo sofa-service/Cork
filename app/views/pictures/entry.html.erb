@@ -7,7 +7,7 @@
 <% end %>
 
   <div class="thumbnail">
-    <img src="<%= @picture.url %>">
+    <a href="<%= @picture.url.match(/(http(?:s)?:\/\/[^\/]+)/)[1] %>" target="_blank"><img src="<%= @picture.url %>"></a>
     <div class="caption">
       <p align="center">
         <% @tags.each do |tag| %>
