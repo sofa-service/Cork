@@ -1,9 +1,34 @@
 <h1>Picture No.<%= @picture.id %></h1>
 
+<% if flash[:error] %>
+  <div class="alert alert-danger">
+    <%= flash[:error] %>
+  </div>
+<% end %>
+
   <div class="thumbnail">
     <img src="<%= @picture.url %>">
     <div class="caption">
-      <p align="center"><a href="<%= grouped_by_tag_pictures_path(@picture.tag_id) %>" class="btn btn-link btn-block">#<%= @picture.tag.name %></a></p>
+      <p align="center">
+        <% @tags.each do |tag| %>
+          <a href="<%= grouped_by_tag_pictures_path(tag.id) %>" class="btn btn-link btn-block">#<%= tag.name %></a>
+        <% end %>
+      </p>
     </div>
   </div>
+
+<%= form_for @tag, :url => tag_create_path, :method => "post" do |f| %>
+
+  <div class="form-group">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+    <%= f.hidden_field :picture_id, :value => @picture.id %>
+  </div>
+
+  <p>
+    <%= f.submit '+ Tag', class: 'btn btn-default', data: { disable_with: '...' } %>
+  </p>
+
+<% end %>
+
 

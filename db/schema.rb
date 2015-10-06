@@ -11,17 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150924180746) do
+ActiveRecord::Schema.define(version: 20150928173906) do
+
+  create_table "picture_tags", force: true do |t|
+    t.integer  "picture_id", null: false
+    t.integer  "tag_id",     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "picture_tags", ["picture_id", "tag_id"], name: "index_picture_tags_on_picture_id_and_tag_id", unique: true, using: :btree
+  add_index "picture_tags", ["picture_id"], name: "index_picture_tags_on_picture_id", using: :btree
+  add_index "picture_tags", ["tag_id"], name: "index_picture_tags_on_tag_id", using: :btree
 
   create_table "pictures", force: true do |t|
     t.string   "url"
-    t.integer  "tag_id"
     t.integer  "dangerous"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "pictures", ["tag_id"], name: "index_pictures_on_tag_id", using: :btree
   add_index "pictures", ["url"], name: "index_pictures_on_url", unique: true, using: :btree
 
   create_table "tags", force: true do |t|

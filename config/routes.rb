@@ -5,7 +5,7 @@ Cork::Application.routes.draw do
   get  'tags'        => 'tags#instances'
   get  'tags/:id'    => 'tags#entry', as: 'tag'
   get  'tag/new'     => 'tags#new'
-  post 'tags'        => 'tags#create'
+  post 'tags'        => 'tags#create', as: 'tag_create'
 
   get  'pictures'          => 'pictures#instances'
   get  'pictures/:id'      => 'pictures#entry', as: 'picture'

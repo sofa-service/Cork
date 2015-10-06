@@ -2,19 +2,30 @@ class PicturesController < ApplicationController
 
   def instances
     @pictures = Picture.all
-
-    # add tag_name on picture object
-    @pictures.each {|picture| picture.tag = Tag.find(picture.tag_id)}
   end
 
   def entry
     @picture = Picture.find(params[:id])
+
+    # add tag_names on picture object
+    tag_ids = PictureTag.where([
+      "picture_id = ?", @picture.id
+    ]).pluck(:tag_id)
+    @tags = Tag.find(tag_ids)
+
+    # for new tag
+    @tag = Tag.new
+
   end
 
   def grouped_by_tag
     @tag = Tag.find(params[:id])
 
-    @grouped_pictures = Picture.find(:all, :conditions => { :tag_id => params[:id] })
+    picture_ids = PictureTag.where([
+      "tag_id = ?", @tag.id
+    ]).pluck(:picture_id)
+
+    @grouped_pictures = Picture.find(picture_ids)
   end
 
   def new
@@ -43,16 +54,22 @@ class PicturesController < ApplicationController
 
     @picture = Picture.new({
       :url       => picture_params[:url],
-      :tag_id    => target_tag.id,
       :dangerous => picture_params[:dangerous]
     })
 
     if @picture.save
+      target_tag.pictures << @picture
       redirect_to picture_path(@picture.id)
       return
     else
-      redirect_to :back, flash: { notice: @picture.errors.full_messages }
-      return
+      target_picture = Picture.find(:first, :conditions => ["url = ?", @picture.url])
+      if defined? target_picture.id
+        redirect_to picture_path(target_picture.id), flash: { notice: 'same pic is already sticked!!' }
+        return
+      else
+        redirect_to :back, flash: { error: @picture.errors.full_messages }
+        return
+      end
     end
   end
 

@@ -7,7 +7,7 @@ class TagsController < ApplicationController
       target_tag = Tag.find(:first, :conditions => ["name = ?", tag_params[:name]])
 
       unless defined? target_tag.id
-        redirect_to pictures_path, flash: { notice: "Tag is Not Found." }
+        redirect_to pictures_path, flash: { notice: "requested tag is Not Found ><" }
         return
       end
 
@@ -25,24 +25,33 @@ class TagsController < ApplicationController
     @tag = Tag.new
   end
 
-#  # GET /tags/1/edit
-#  def edit
-#  end
-
-  # POST /tags
-  # POST /tags.json
   def create
-    @tag = Tag.new(tag_params)
+    target_tag = Tag.find(:first, :conditions => ["name = ?", tag_params[:name]])
+    @picture = Picture.find(:first, :conditions => ["id = ?", tag_params[:picture_id]])
 
-    respond_to do |format|
-      if @tag.save
-        format.html { redirect_to @tag, notice: 'Tag was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @tag }
+    unless defined? target_tag.id
+      @tag = Tag.new({:name => tag_params[:name]})
+      @tag.save
+      target_tag = @tag
+      target_tag.pictures << @picture
+
+      redirect_to picture_path(@picture.id)
+      return
+    else
+      @picture_tag = PictureTag.new({
+        :picture_id => @picture.id,
+        :tag_id     => target_tag.id
+      })
+
+      if @picture_tag.save
+        redirect_to picture_path(@picture.id)
+        return
       else
-        format.html { render action: 'new' }
-        format.json { render json: @tag.errors, status: :unprocessable_entity }
+        redirect_to picture_path(@picture.id), flash: { error: 'same tag is already sticked!!' }
+        return
       end
     end
+
   end
 
   # PATCH/PUT /tags/1
@@ -77,6 +86,6 @@ class TagsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tag_params
-      params.require(:tag).permit(:name)
+      params.require(:tag).permit(:name, :picture_id)
     end
 end
