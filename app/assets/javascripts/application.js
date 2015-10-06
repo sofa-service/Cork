@@ -14,5 +14,6 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap.min
+//= require typeahead.bundle.min
 //= require pins.min
 //= require_tree .

@@ -16,6 +16,11 @@ class TagsController < ApplicationController
     end
 
     @tags = Tag.all
+
+    respond_to do |format|
+      format.html { render action: 'instances' }
+      format.json { render json: @tags.pluck(:name) }
+    end
   end
 
   def entry

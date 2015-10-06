@@ -15,9 +15,9 @@
       <%= link_to 'Cork', root_path, class: 'navbar-brand' %>
 
       <div style="width:300px; margin:0 auto;">
-        <%= form_tag('/tags', :method => :get, class: 'navbar-form navbar-left') do %>
-          <div class="form-group" align="center">
-            <input id="tag_name" name="tag[name]" type="text" class="form-control" placeholder="Search">
+        <%= form_tag('/tags', :method => :get, id: 'tag_search', class: 'navbar-form navbar-left') do %>
+          <div id="prefetch" class="form-group" align="center">
+            <input id="tag_name" name="tag[name]" type="text" class="form-control typeahead" placeholder="Search">
           </div>
         <% end %>
       </div>
@@ -33,4 +33,20 @@
     <%= yield %>
   </div>
 </body>
+<script>
+var tags = new Bloodhound({
+  datumTokenizer: Bloodhound.tokenizers.whitespace,
+  queryTokenizer: Bloodhound.tokenizers.whitespace,
+  prefetch: '/tags.json'
+});
+
+// passing in `null` for the `options` arguments will result in the default
+// options being used
+$('#prefetch .typeahead').typeahead(null, {
+  name: 'tags',
+  source: tags
+}).on("typeahead:selected typeahead:autocomplete", function(e, datum) {
+  return $('#tag_search').submit();
+});
+</script>
 </html>
